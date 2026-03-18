@@ -9,15 +9,21 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), ui(new Ui::MainWindow
     this->sqmModel = new SqmModel;
     ui->sqmTable->setModel(sqmModel);
 
-    connect(ui->calculateButton, &QPushButton::clicked, [this] {sqmModel->calculateSQMTable(getBase(), getExponent(), getModulus()); ui->sqmTable->setModel(sqmModel);} );
+    connect(ui->calculateButton,
+        &QPushButton::clicked,
+        [this] {
+            sqmModel->calculateSQMTable(getBase(), getExponent(), getModulus());
+            ui->sqmTable->setModel(sqmModel);
+        }
+    );
 
-    // Styling - my ideas, realized with help of ChatGPT
+    // Styling
     setFixedWidth(width());
 
     ui->calculateButton->setMinimumSize(140, 64);
-
     ui->calculateButton->setCursor(Qt::PointingHandCursor);
 
+    ui->sqmTable->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->sqmTable->verticalHeader()->hide();
     ui->sqmTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->sqmTable->setShowGrid(false);
